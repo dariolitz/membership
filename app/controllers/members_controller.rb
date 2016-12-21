@@ -1,5 +1,6 @@
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token
 
   # GET /members
   # GET /members.json
@@ -28,6 +29,7 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       if @member.save
+        logger.debug("Full URL: #{request.original_fullpath}?#{request.raw_post}")
         format.html { redirect_to @member, notice: 'Member was successfully created.' }
         format.json { render :show, status: :created, location: @member }
       else
