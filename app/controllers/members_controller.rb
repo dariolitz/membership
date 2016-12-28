@@ -26,7 +26,7 @@ class MembersController < ApplicationController
   # POST /members.json
   def create
     @member = Member.new(member_params)
-
+    sleep(10)
     respond_to do |format|
       if @member.save
         logger.debug("Full URL: #{request.original_fullpath}?#{request.raw_post}")
